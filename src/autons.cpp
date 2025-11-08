@@ -1,4 +1,6 @@
 #include "main.h"
+using namespace pros;
+using namespace ez;
 
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
@@ -9,6 +11,8 @@
 const int DRIVE_SPEED = 110;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
+
+
 
 ///
 // Constants
@@ -57,14 +61,10 @@ void drive_example() {
   // The third parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater than the slew distance + a few inches
 
-  chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
+  chassis.pid_odom_set(24_in, DRIVE_SPEED, true);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
-  chassis.pid_wait();
+  printf("POSITION", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
 }
 
 ///
@@ -247,11 +247,9 @@ void odom_drive_example() {
   chassis.pid_odom_set(24_in, DRIVE_SPEED, true);
   chassis.pid_wait();
 
-  chassis.pid_odom_set(-12_in, DRIVE_SPEED);
-  chassis.pid_wait();
+  printf("POSITION", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
 
-  chassis.pid_odom_set(-12_in, DRIVE_SPEED);
-  chassis.pid_wait();
+
 }
 
 ///
@@ -376,3 +374,4 @@ void measure_offsets() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
+

@@ -9,6 +9,9 @@ pros::adi::Pneumatics lift('a', true);
 pros::adi::Pneumatics descorer('g', false);
 
 const int IN_SPEED = 100;
+const int DRIVE_SPEED = 110;
+const int TURN_SPEED = 90;
+const int SWING_SPEED = 110;
 
 
 // Chassis constructor
@@ -139,7 +142,14 @@ void autonomous() {
   to be consistent
   */
 
-  ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
+  
+
+  chassis.pid_odom_set(24_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  printf("POSITION", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
+
+  //ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
 }
 
 /**

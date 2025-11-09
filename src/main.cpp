@@ -1,4 +1,8 @@
 #include "main.h"
+#include "EZ-Template/util.hpp"
+#include "pros/misc.h"
+using namespace pros;
+using namespace ez;
 
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
@@ -143,11 +147,11 @@ void autonomous() {
   */
 
   
-
-  chassis.pid_odom_set(24_in, DRIVE_SPEED, true);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  //chassis.pid_odom_set(24_in, DRIVE_SPEED, true);
   chassis.pid_wait();
-
-  printf("POSITION", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
+  ez::screen_print("POSITION: " + std::to_string(chassis.odom_x_get()) + " " + std::to_string((chassis.odom_y_get())) + " " + std::to_string((chassis.odom_theta_get())), 1);
+  //printf("POSITION", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
 
   //ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
 }

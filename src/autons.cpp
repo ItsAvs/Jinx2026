@@ -11,8 +11,24 @@ using namespace ez;
 const int DRIVE_SPEED = 110;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
+const int IN_SPEED = 100;
 
+pros::MotorGroup intake({-4,-6}, pros::MotorGearset::blue);
+pros::adi::Pneumatics lift('a', true);
+pros::adi::Pneumatics descorer('g', false);
 
+void intake_move(){
+  intake.move(IN_SPEED);
+}
+
+void intake_stop(){
+  intake.move(0);
+  intake.brake();
+}
+
+void outtake(){
+  intake.move(-IN_SPEED);
+}
 
 ///
 // Constants
@@ -63,6 +79,7 @@ void drive_example() {
 
   chassis.pid_odom_set(24_in, DRIVE_SPEED, true);
   chassis.pid_wait();
+  outtake();
 
   printf("POSITION", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
 }

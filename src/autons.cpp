@@ -390,5 +390,43 @@ void measure_offsets() {
 
 // . . .
 // Make your own autonomous functions here!
-// . . .
+void red_left_corner(){
+  chassis.pid_targets_reset();
+  chassis.drive_imu_reset();
+  chassis.drive_sensor_reset();
+  chassis.odom_xyt_set(0_in, 0_in, 0_deg);
+  chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
+  
+  // Drive forward toward the center barrier
+  chassis.pid_drive_set(36_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  intake_move();
+  intake_stop();
+  chassis.pid_drive_set(-5_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+}
+  // Drive up to the goal to drop triballs
+//   chassis.pid_drive_set(40_in, DRIVE_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_turn_set(-90_deg, TURN_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_drive_set(5_in, DRIVE_SPEED);
+//   chassis.pid_wait();
+//   chassis.pid_turn_set(90_deg, TURN_SPEED);
+//   chassis.pid_wait();
+//   outtake();
+//   intake_stop();
+
+
+//   // Back up from the goal
+//   chassis.pid_drive_set(-20_in, DRIVE_SPEED);
+//   chassis.pid_wait();
+
+  
+//   chassis.pid_turn_set(45_deg, TURN_SPEED);
+//   chassis.pid_wait();
+// }
+
 
